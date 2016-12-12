@@ -58,7 +58,7 @@ public class CartController {
     if (cart != null) {
       LOGGER.info("Getting cartitems");
       List<CartItem> items = cart.getItems();
-      if (items) {
+      if (items != null) {
         stockService.updateBookStocks(items);
       }
 
