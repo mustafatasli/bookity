@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <head>
+    <title>Bookity</title>
+    <link rel="stylesheet" th:href="@{bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{bootstrap/css/bootstrap-theme.min.css}" />
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div>
+            <h2>Customers</h2>
+      </div>
+      <div sec:authorize="isAuthenticated()">
+          <a th:href="@{/logout}">Log out</a>
+      </div>
+      <div sec:authorize="isAnonymous()">
+          <a th:href="@{/login}">Log in</a>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Book</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+              <tbody th:unless="${#lists.isEmpty(customers)}">
+                <tr th:each="user : ${customers}">
+                  <td>
+                    <span th:text="${user.name}">Name</span>
+                  </td>
+                  <td>
+                    <span th:text="${user.password}">Password</span>
+                  </td>
+                  <td>
+                    <span th:text="${user.email}">Email</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div th:if="${#lists.isEmpty(customers)}">
+              <p>There is no customer</p>
+            </div>
+
+            <form method="POST" th:action="@{/payment}" th:object="${cart}">
+                  <input type="hidden" th:field="*{id}"></input>
+                  <input type="submit" text="Buy"></input>
+            </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

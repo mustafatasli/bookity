@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <head>
+    <title>Bookity</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap-theme.min.css}" />
+  </head>
+
+  <body>
+    <div class="container">
+
+        <div class="row" style="margin: 15%;" >
+            <div class="col-xs-8">
+
+            <h3>Sign Up</h3>
+		    <form action="#" th:action="@{/customers/signup}" th:object="${user}" method="post">
+		    	<div class="control-group">
+	            <label class="control-label" for="username">Username:</label>
+	              <div class="controls">
+	              <input type="text" th:field="*{name}" />
+	              <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
+	              </div>
+	            </div>
+
+	            <div class="control-group">
+	            <label class="control-label" for="email">Email:</label>
+	              <div class="controls">
+	              <input type="text" id="email" th:field="*{email}" />
+	              <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</p>
+	              </div>
+	            </div>
+
+	            <div class="control-group">
+	            <label class="control-label" for="password">Password:</label>
+	              <div class="controls">
+	              <input type="password" id="password" th:field="*{password}" />
+	              <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>
+	              </div>
+	            </div>
+
+	            <div class="control-group" style="margin: 10px;">
+	              <div class="controls">
+		        	<button type="submit" class="btn btn-primary">SignUp</button>
+		        	</div>
+		        </div>
+		    </form>
+		   </div>
+		</div>
+	</div>
+</body>
+</html>

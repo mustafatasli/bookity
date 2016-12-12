@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <head>
+    <title>Bookity</title>
+    <link rel="stylesheet" th:href="@{bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{bootstrap/css/bootstrap-theme.min.css}" />
+  </head>
+
+  <body>
+    <h2>Books</h2>
+
+    <div class="container">
+      <div sec:authorize="isAuthenticated()">
+          <a th:href="@{/logout}">Log out</a>
+      </div>
+      <div sec:authorize="isAnonymous()">
+          <a th:href="@{/login}">Log in</a>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+              <tbody th:unless="${#lists.isEmpty(books)}">
+                <tr th:each="book : ${books}">
+                  <td>
+                    <a th:href="@{/detail(id=${book.id})}" th:text="${book.title}"></a>
+                  </td>
+                  <td>
+                    <span th:text="${book.author}">Author</span>
+                  </td>
+                  <td>
+                    <span th:text="${book.isbn}"></span>
+                  </td>
+                  <td>
+                    <span th:text="${book.category}"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div th:if="${#lists.isEmpty(books)}">
+              <p>You have no books in your book list</p>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

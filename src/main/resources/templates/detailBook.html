@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <head>
+    <title>Bookity</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap-theme.min.css}" />
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div>
+            <h2>Book</h2>
+      </div>
+      <div sec:authorize="isAuthenticated()">
+          <a th:href="@{/logout}">Log out</a>
+      </div>
+      <div sec:authorize="isAnonymous()">
+          <a th:href="@{/login}">Log in</a>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Description</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span th:text="${book.title}">ID</span>
+                  </td>
+                  <td>
+                   <span th:text="${book.author}"></span>
+                  </td>
+                  <td>
+                    <span th:text="${book.isbn}"></span>
+                  </td>
+                  <td>
+                    <span th:text="${book.description}"></span>
+                  </td>
+                  <td>
+                    <span th:text="${book.category}"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div sec:authorize="isAuthenticated()">
+              <a class="btn" th:href="@{update(id=${book.id})}">Edit</a>
+              <a class="btn" th:href="@{delete(id=${book.id})}">Delete</a>
+            </div>
+
+            <form method="POST" th:action="@{/cart/update}" th:object="${book}">
+                  <input type="hidden" th:field="*{id}"></input>
+                  <button type="submit" class="btn btn-primary">Add To Cart</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

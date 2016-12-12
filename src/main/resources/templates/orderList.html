@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <head>
+    <title>Bookity</title>
+    <link rel="stylesheet" th:href="@{bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{bootstrap/css/bootstrap-theme.min.css}" />
+  </head>
+
+  <body>
+    <h2>Books</h2>
+
+    <div class="container">
+      <div sec:authorize="isAuthenticated()">
+          <a th:href="@{/logout}">Log out</a>
+      </div>
+      <div sec:authorize="isAnonymous()">
+          <a th:href="@{/login}">Log in</a>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Order</th>
+                <th>Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+              <tbody th:unless="${#lists.isEmpty(items)}">
+                <tr th:each="item : ${items}">
+                  <td>
+                    <a th:href="@{orders/detail(id=${item.id})}" th:text="${item.id}"></a>
+                  </td>
+                  <td>
+                    <span th:text="${item.status}"></span>
+                  </td>
+                  <td>
+                    <span th:text="${item.total}"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div th:if="${#lists.isEmpty(items)}">
+              <p>You have no orders</p>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

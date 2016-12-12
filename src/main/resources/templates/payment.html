@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <head>
+    <title>Bookity</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap-theme.min.css}" />
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xs-12" style="margin: 15%;">
+
+          <h4>Total: <span th:text="${total}"></span></h4>
+
+          <form method="POST" th:action="@{/payment/complete}" th:object="${cart}">
+            <input type="hidden" th:field="*{id}"></input>
+            <div class="control-group">
+              <label class="control-label" for="title">Card Number:</label>
+                <div class="controls">
+                <input type="text" id="number" name="number" />
+                </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="title">Name:</label>
+                <div class="controls">
+                <input type="text" id="name" name="name" />
+                </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="title">Expires at:</label>
+                <div class="controls">
+                <input type="text" id="expire" name="expire" />
+                </div>
+            </div>
+
+            <div class="control-group" style="margin: 10px;">
+                <div class="controls">
+                <button type="submit" class="btn btn-primary">Pay</button>
+                </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
