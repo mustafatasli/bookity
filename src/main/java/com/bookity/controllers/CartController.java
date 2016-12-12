@@ -58,7 +58,10 @@ public class CartController {
     if (cart != null) {
       LOGGER.info("Getting cartitems");
       List<CartItem> items = cart.getItems();
-      stockService.updateBookStocks(items);
+      if (items) {
+        stockService.updateBookStocks(items);
+      }
+
 
       model.addAttribute("total", cartService.getTotal(items));
       model.addAttribute("items", items);

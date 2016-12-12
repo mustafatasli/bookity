@@ -82,11 +82,10 @@ public class WebSecurityConfig {
                     .and()
                 .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/books")
+                    .defaultSuccessUrl("/")
                     .permitAll()
                     .and()
                 .logout()
-                    .defaultSuccessUrl("/books")
                     .permitAll();
         }
     }

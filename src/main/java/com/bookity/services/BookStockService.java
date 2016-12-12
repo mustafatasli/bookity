@@ -29,11 +29,11 @@ public class BookStockService {
 
 	public void updateBookStocks(List<CartItem> items) {
 		for(CartItem item : items) {
-        LOGGER.info("Cartitem " + item.getId());
+        	LOGGER.info("Cartitem " + item.getId());
 
-        BookStock stock = getBookStock(item.getBook());
-        item.setBookStock(stock);
-      }
+        	BookStock stock = getBookStock(item.getBook());
+        	item.setBookStock(stock);
+      	}
 	}
 
 	public BookStock getBookStock(Book book) {

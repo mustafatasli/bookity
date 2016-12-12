@@ -16,11 +16,6 @@ public class BookityApplication extends WebMvcConfigurerAdapter {
 		SpringApplication.run(BookityApplication.class, args);
 	}
 
-	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(BookityApplication.class);
-    }
-
    @Override
    public void addViewControllers(ViewControllerRegistry registry) {
       super.addViewControllers(registry);
